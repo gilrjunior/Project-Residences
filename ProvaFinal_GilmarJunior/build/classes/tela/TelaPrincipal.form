@@ -110,11 +110,11 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jbt_nomeDR" max="32767" attributes="0"/>
+                                  <Component id="jtf_nomeDR" max="32767" attributes="0"/>
                                   <Component id="jtf_sobrenomeDR" max="32767" attributes="0"/>
                                   <Component id="jtf_cpfDR" max="32767" attributes="0"/>
                                   <Component id="jtf_telefoneDR" pref="287" max="32767" attributes="0"/>
-                                  <Component id="jtf_rendamensalDR" max="32767" attributes="0"/>
+                                  <Component id="jtf_rendamensalDR" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -132,7 +132,7 @@
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jbt_nomeDR" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jtf_nomeDR" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -202,7 +202,7 @@
                 <Property name="text" type="java.lang.String" value="Renda Mensal"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jbt_nomeDR">
+            <Component class="javax.swing.JTextField" name="jtf_nomeDR">
             </Component>
             <Component class="javax.swing.JTextField" name="jtf_sobrenomeDR">
             </Component>
@@ -212,6 +212,9 @@
                   <Format format="###########" subtype="-1" type="5"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtf_cpfDRActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="jtf_telefoneDR">
               <Properties>
@@ -220,32 +223,37 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="jtf_rendamensalDR">
-              <Properties>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-                  <Format format="#,###.00" subtype="-1" type="0"/>
-                </Property>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JButton" name="jbt_inserirDR">
               <Properties>
                 <Property name="text" type="java.lang.String" value="INSERIR"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbt_inserirDRActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbbt_removerDR">
               <Properties>
                 <Property name="text" type="java.lang.String" value="REMOVER"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbbt_removerDRActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbt_atualizarDR">
               <Properties>
                 <Property name="text" type="java.lang.String" value="ATUALIZAR"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbt_atualizarDRActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbt_mostrarDR">
               <Properties>
                 <Property name="text" type="java.lang.String" value="MOSTRAR"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbt_mostrarDRActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
@@ -255,7 +263,7 @@
             <Component class="javax.swing.JFormattedTextField" name="jtf_cpfB_DR">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-                  <Format format="##########" subtype="-1" type="5"/>
+                  <Format format="###########" subtype="-1" type="5"/>
                 </Property>
               </Properties>
               <Events>
@@ -271,11 +279,19 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="BUSCAR"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbt_buscarDRActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbt_limpaTelaDR">
               <Properties>
                 <Property name="text" type="java.lang.String" value="LIMPAR TELA"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbt_limpaTelaDRActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jtf_rendamensalDR">
             </Component>
           </SubComponents>
         </Container>
@@ -458,6 +474,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="INSERIR"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbt_inserirRActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbt_removerR">
               <Properties>
@@ -521,44 +540,47 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jtf_codV" max="32767" attributes="0"/>
                           <Component id="jtf_cpfV" max="32767" attributes="0"/>
                           <Component id="jtf_codrV" pref="214" max="32767" attributes="0"/>
                           <Component id="jtf_dtV" max="32767" attributes="0"/>
                           <Component id="jtf_valorV" max="32767" attributes="0"/>
+                          <Component id="jtf_codV" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace pref="78" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jbt_inserirV" min="-2" pref="110" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jbt_atualizarV" min="-2" pref="110" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jbt_mostrarV" min="-2" pref="110" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jbt_limparTelaV" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="203" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jbt_vendas6M" alignment="1" min="-2" pref="366" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jtf_codVrem" min="-2" pref="153" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jbt_removerV" min="-2" pref="110" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="jbt_inserirV" min="-2" pref="110" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jbt_atualizarV" min="-2" pref="110" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="jbt_mostrarV" min="-2" pref="110" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="jbt_limparTelaV" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="203" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="jbt_vendas6M" alignment="0" min="-2" pref="366" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jtf_codVrem" min="-2" pref="153" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jbt_removerV" min="-2" pref="110" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -598,9 +620,11 @@
                           <Component id="jbt_atualizarV" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jbt_mostrarV" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jbt_vendas6M" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jbt_removerV" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -638,11 +662,6 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Valor de Venda:"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jtf_codV">
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jtf_codVMouseClicked"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="jtf_cpfV">
               <Properties>
@@ -708,6 +727,18 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jtf_codVrem">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel23">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="ATEN&#xc7;&#xc3;O: Se voc&#xea; n&#xe3;o lembra o c&#xf3;digo de venda, clique em mostrar"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="jtf_codV">
+              <Properties>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+                  <Format format="#U#L#" subtype="-1" type="5"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

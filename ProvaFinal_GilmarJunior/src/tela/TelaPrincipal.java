@@ -4,7 +4,14 @@
  */
 package tela;
 
+import bancoDAO.BancoDAO;
+import classes.*;
 import static java.lang.System.exit;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,9 +19,8 @@ import static java.lang.System.exit;
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TelaPrincipal
-     */
+    BancoDAO bancodao; 
+    
     public TelaPrincipal() {
         initComponents();
     }
@@ -36,11 +42,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jbt_nomeDR = new javax.swing.JTextField();
+        jtf_nomeDR = new javax.swing.JTextField();
         jtf_sobrenomeDR = new javax.swing.JTextField();
         jtf_cpfDR = new javax.swing.JFormattedTextField();
         jtf_telefoneDR = new javax.swing.JFormattedTextField();
-        jtf_rendamensalDR = new javax.swing.JFormattedTextField();
         jbt_inserirDR = new javax.swing.JButton();
         jbbt_removerDR = new javax.swing.JButton();
         jbt_atualizarDR = new javax.swing.JButton();
@@ -50,6 +55,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jbt_buscarDR = new javax.swing.JButton();
         jbt_limpaTelaDR = new javax.swing.JButton();
+        jtf_rendamensalDR = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -77,7 +83,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jtf_codV = new javax.swing.JTextField();
         jtf_cpfV = new javax.swing.JFormattedTextField();
         jtf_codrV = new javax.swing.JFormattedTextField();
         jtf_dtV = new javax.swing.JFormattedTextField();
@@ -90,6 +95,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jbt_vendas6M = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
         jtf_codVrem = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        jtf_codV = new javax.swing.JFormattedTextField();
         jbt_sair = new javax.swing.JButton();
 
         jLabel14.setText("jLabel14");
@@ -117,6 +124,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jtf_cpfDR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_cpfDRActionPerformed(evt);
+            }
+        });
 
         try {
             jtf_telefoneDR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("+##(##)#####-####")));
@@ -124,20 +136,38 @@ public class TelaPrincipal extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        jtf_rendamensalDR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.00"))));
-
         jbt_inserirDR.setText("INSERIR");
+        jbt_inserirDR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_inserirDRActionPerformed(evt);
+            }
+        });
 
         jbbt_removerDR.setText("REMOVER");
+        jbbt_removerDR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbbt_removerDRActionPerformed(evt);
+            }
+        });
 
         jbt_atualizarDR.setText("ATUALIZAR");
+        jbt_atualizarDR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_atualizarDRActionPerformed(evt);
+            }
+        });
 
         jbt_mostrarDR.setText("MOSTRAR");
+        jbt_mostrarDR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_mostrarDRActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("BUSCA POR CPF");
 
         try {
-            jtf_cpfB_DR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##########")));
+            jtf_cpfB_DR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -150,8 +180,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel7.setText("Informe o CPF");
 
         jbt_buscarDR.setText("BUSCAR");
+        jbt_buscarDR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_buscarDRActionPerformed(evt);
+            }
+        });
 
         jbt_limpaTelaDR.setText("LIMPAR TELA");
+        jbt_limpaTelaDR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_limpaTelaDRActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -191,7 +231,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jbt_nomeDR)
+                            .addComponent(jtf_nomeDR)
                             .addComponent(jtf_sobrenomeDR)
                             .addComponent(jtf_cpfDR)
                             .addComponent(jtf_telefoneDR, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
@@ -207,7 +247,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jbt_nomeDR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtf_nomeDR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -269,6 +309,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
 
         jbt_inserirR.setText("INSERIR");
+        jbt_inserirR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_inserirRActionPerformed(evt);
+            }
+        });
 
         jbt_removerR.setText("REMOVER");
 
@@ -389,12 +434,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jLabel21.setText("Valor de Venda:");
 
-        jtf_codV.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtf_codVMouseClicked(evt);
-            }
-        });
-
         try {
             jtf_cpfV.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
         } catch (java.text.ParseException ex) {
@@ -429,6 +468,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jLabel22.setText("Código da Venda");
 
+        jLabel23.setText("ATENÇÃO: Se você não lembra o código de venda, clique em mostrar");
+
+        try {
+            jtf_codV.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#U#L#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -443,36 +490,38 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel17))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jtf_codV)
                     .addComponent(jtf_cpfV)
                     .addComponent(jtf_codrV, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
                     .addComponent(jtf_dtV)
-                    .addComponent(jtf_valorV))
+                    .addComponent(jtf_valorV)
+                    .addComponent(jtf_codV))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(78, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jbt_inserirV, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jbt_atualizarV, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbt_mostrarV, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jbt_limparTelaV)
-                                .addGap(203, 203, 203))))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jbt_vendas6M, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel22)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtf_codVrem, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbt_removerV, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(66, 66, 66))))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel23)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(jbt_inserirV, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jbt_atualizarV, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jbt_mostrarV, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jbt_limparTelaV)
+                                    .addGap(203, 203, 203))))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jbt_vendas6M, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel22)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jtf_codVrem, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jbt_removerV, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(66, 66, 66)))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -502,9 +551,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(jbt_inserirV)
                     .addComponent(jbt_atualizarV)
                     .addComponent(jbt_mostrarV))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbt_vendas6M)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel23)
+                .addGap(2, 2, 2)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbt_removerV)
                     .addComponent(jLabel22)
@@ -557,10 +608,158 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtbP_vendasMouseClicked
 
-    private void jtf_codVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtf_codVMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtf_codVMouseClicked
+    private void jbt_inserirDRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_inserirDRActionPerformed
+        if(jtf_cpfDR.getText().equals("           ")){
+            JOptionPane.showMessageDialog(null, "PARA INSERIR COMPLETE TODOS OS CAMPOS");
+        }else{
+                       
+            try {
+                bancodao = new BancoDAO();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            Dono dono = new Dono();
+            
+            dono.setCpf(jtf_cpfDR.getText());
+            dono.setNome(jtf_nomeDR.getText()+" "+jtf_sobrenomeDR.getText());
+            dono.setTelefone(jtf_telefoneDR.getText());
+            dono.setRendaMensal(Float.parseFloat(jtf_rendamensalDR.getText()));
+                    
+            bancodao.insertDono(dono);
+            limpartelaDono();
+            
+        }
+    }//GEN-LAST:event_jbt_inserirDRActionPerformed
 
+    private void jtf_cpfDRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_cpfDRActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_cpfDRActionPerformed
+
+    private void jbt_limpaTelaDRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_limpaTelaDRActionPerformed
+        limpartelaDono();
+    }//GEN-LAST:event_jbt_limpaTelaDRActionPerformed
+
+    private void jbbt_removerDRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbbt_removerDRActionPerformed
+        if(jtf_cpfDR.getText().equals("           ")){
+            JOptionPane.showMessageDialog(null, "INFORME O CPF NO CAMPO ACIMA PARA REMOVER");
+        }else{
+                        
+            try {
+                bancodao = new BancoDAO();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+           bancodao.excluirDono(jtf_cpfDR.getText());
+           limpartelaDono();
+            
+        }
+                
+    }//GEN-LAST:event_jbbt_removerDRActionPerformed
+
+    private void jbt_atualizarDRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_atualizarDRActionPerformed
+        if(jtf_cpfDR.getText().equals("           ")){
+            JOptionPane.showMessageDialog(null, "PARA ATUALIZAR COMPLETE TODOS OS CAMPOS");
+        }else{
+                       
+            try {
+                bancodao = new BancoDAO();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            Dono dono = new Dono();
+            
+            dono.setCpf(jtf_cpfDR.getText());
+            dono.setNome(jtf_nomeDR.getText()+" "+jtf_sobrenomeDR.getText());
+            dono.setTelefone(jtf_telefoneDR.getText());
+            dono.setRendaMensal(Float.parseFloat(jtf_rendamensalDR.getText()));
+                    
+            bancodao.updateDono(dono);
+            limpartelaDono();
+            
+        }   
+    }//GEN-LAST:event_jbt_atualizarDRActionPerformed
+
+    private void jbt_mostrarDRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_mostrarDRActionPerformed
+        TelaDonos tela2 =  new TelaDonos();
+        tela2.setVisible(true);
+    }//GEN-LAST:event_jbt_mostrarDRActionPerformed
+
+    private void jbt_buscarDRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_buscarDRActionPerformed
+        if(jtf_cpfB_DR.getText().equals("           ")){
+            JOptionPane.showMessageDialog(null, "INFORME O CPF NO CAMPO AO LADO PARA RBUSCAR");
+        }else{
+                        
+            try {
+                bancodao = new BancoDAO();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+           ArrayList <Dono> listadonos = bancodao.mostraDono(0, jtf_cpfB_DR.getText());
+        
+           for(Dono dono : listadonos){
+
+                jtf_cpfDR.setText(dono.getCpf());
+                String a[] = dono.getNome().split(" ", 2);
+                jtf_nomeDR.setText(a[0]);
+                jtf_sobrenomeDR.setText(a[1]);
+                jtf_telefoneDR.setText(dono.getTelefone());
+                jtf_rendamensalDR.setText(Float.toString(dono.getRendaMensal()));
+                jtf_cpfB_DR.setText("");
+
+           }            
+        }
+           
+    }//GEN-LAST:event_jbt_buscarDRActionPerformed
+
+    private void jbt_inserirRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_inserirRActionPerformed
+        if(jtf_codR.getText().equals("               ")){
+            JOptionPane.showMessageDialog(null, "PARA INSERIR COMPLETE TODOS OS CAMPOS");
+        }else{
+                       
+            try {
+                bancodao = new BancoDAO();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            Dono dono = new Dono();
+            
+            dono.setCpf(jtf_cpfDR.getText());
+            dono.setNome(jtf_nomeDR.getText()+" "+jtf_sobrenomeDR.getText());
+            dono.setTelefone(jtf_telefoneDR.getText());
+            dono.setRendaMensal(Float.parseFloat(jtf_rendamensalDR.getText()));
+                    
+            bancodao.insertDono(dono);
+            limpartelaDono();
+            
+        }
+    }//GEN-LAST:event_jbt_inserirRActionPerformed
+
+    private void limpartelaDono(){
+        
+            jtf_cpfDR.setText("");
+            jtf_nomeDR.setText("");
+            jtf_sobrenomeDR.setText("");
+            jtf_telefoneDR.setText("");
+            jtf_rendamensalDR.setText("");
+            jtf_cpfB_DR.setText("");
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -612,6 +811,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -637,7 +837,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jbt_mostrarDR;
     private javax.swing.JButton jbt_mostrarR;
     private javax.swing.JButton jbt_mostrarV;
-    private javax.swing.JTextField jbt_nomeDR;
     private javax.swing.JButton jbt_removerR;
     private javax.swing.JButton jbt_removerV;
     private javax.swing.JButton jbt_sair;
@@ -647,15 +846,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jtf_bairroR;
     private javax.swing.JTextField jtf_bairro_BR;
     private javax.swing.JFormattedTextField jtf_codR;
-    private javax.swing.JTextField jtf_codV;
+    private javax.swing.JFormattedTextField jtf_codV;
     private javax.swing.JTextField jtf_codVrem;
     private javax.swing.JFormattedTextField jtf_codrV;
     private javax.swing.JFormattedTextField jtf_cpfB_DR;
     private javax.swing.JFormattedTextField jtf_cpfDR;
     private javax.swing.JFormattedTextField jtf_cpfV;
     private javax.swing.JFormattedTextField jtf_dtV;
+    private javax.swing.JTextField jtf_nomeDR;
     private javax.swing.JFormattedTextField jtf_numR;
-    private javax.swing.JFormattedTextField jtf_rendamensalDR;
+    private javax.swing.JTextField jtf_rendamensalDR;
     private javax.swing.JFormattedTextField jtf_ruaR;
     private javax.swing.JTextField jtf_sobrenomeDR;
     private javax.swing.JFormattedTextField jtf_telefoneDR;

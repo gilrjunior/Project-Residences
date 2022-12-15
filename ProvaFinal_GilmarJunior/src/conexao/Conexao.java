@@ -1,13 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package conexao;
 
-/**
- *
- * @author User
- */
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.SQLException;
+
 public class Conexao {
+    
+    public static Connection getConexao(){
+        
+        Connection conexao = null;
+        
+        try{
+            
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/residencias","root","admgil");
+    
+        }catch(SQLException e){
+            
+            System.out.print("\n Erro ao conectar: "+e.toString());
+        }
+        
+        return conexao;
+    }
     
 }
