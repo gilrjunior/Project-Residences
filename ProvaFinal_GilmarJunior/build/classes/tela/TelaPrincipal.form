@@ -453,14 +453,14 @@
             <Component class="javax.swing.JFormattedTextField" name="jtf_codR">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-                  <Format format="#################" subtype="-1" type="5"/>
+                  <Format format="######" subtype="-1" type="5"/>
                 </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="jtf_areaR">
               <Properties>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-                  <Format format="############" subtype="-1" type="5"/>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format format="#0" subtype="-1" type="0"/>
                 </Property>
               </Properties>
             </Component>
@@ -482,16 +482,25 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="REMOVER"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbt_removerRActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbt_atualizarR">
               <Properties>
                 <Property name="text" type="java.lang.String" value="ATUALIZAR"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbt_atualizarRActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbt_mostrarR">
               <Properties>
                 <Property name="text" type="java.lang.String" value="MOSTRAR"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbt_mostrarRActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel15">
               <Properties>
@@ -509,11 +518,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="BUSCAR"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbt_buscarRActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbt_limparTelaR">
               <Properties>
                 <Property name="text" type="java.lang.String" value="LIMPAR TELA"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbt_limparTelaRActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

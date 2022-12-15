@@ -297,16 +297,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel13.setText("Bairro:");
 
         try {
-            jtf_codR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#################")));
+            jtf_codR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("######")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
-        try {
-            jtf_areaR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("############")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        jtf_areaR.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         jbt_inserirR.setText("INSERIR");
         jbt_inserirR.addActionListener(new java.awt.event.ActionListener() {
@@ -316,18 +312,43 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         jbt_removerR.setText("REMOVER");
+        jbt_removerR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_removerRActionPerformed(evt);
+            }
+        });
 
         jbt_atualizarR.setText("ATUALIZAR");
+        jbt_atualizarR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_atualizarRActionPerformed(evt);
+            }
+        });
 
         jbt_mostrarR.setText("MOSTRAR");
+        jbt_mostrarR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_mostrarRActionPerformed(evt);
+            }
+        });
 
         jLabel15.setText("BUSCA POR BAIRRO");
 
         jLabel16.setText("Informe o Bairro:");
 
         jbt_buscarR.setText("BUSCAR");
+        jbt_buscarR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_buscarRActionPerformed(evt);
+            }
+        });
 
         jbt_limparTelaR.setText("LIMPAR TELA");
+        jbt_limparTelaR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_limparTelaRActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -724,7 +745,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbt_buscarDRActionPerformed
 
     private void jbt_inserirRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_inserirRActionPerformed
-        if(jtf_codR.getText().equals("               ")){
+        if(jtf_codR.getText().equals("      ")){
             JOptionPane.showMessageDialog(null, "PARA INSERIR COMPLETE TODOS OS CAMPOS");
         }else{
                        
@@ -736,18 +757,84 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            Dono dono = new Dono();
-            
-            dono.setCpf(jtf_cpfDR.getText());
-            dono.setNome(jtf_nomeDR.getText()+" "+jtf_sobrenomeDR.getText());
-            dono.setTelefone(jtf_telefoneDR.getText());
-            dono.setRendaMensal(Float.parseFloat(jtf_rendamensalDR.getText()));
+            Residencia residencia = new Residencia();
+            residencia.setCod_res(Integer.parseInt(jtf_codR.getText()));
+            residencia.setArea(Float.parseFloat(jtf_areaR.getText()));
+            residencia.setRua(jtf_ruaR.getText());
+            residencia.setNum(jtf_numR.getText());
+            residencia.setBairro(jtf_bairroR.getText());            
                     
-            bancodao.insertDono(dono);
-            limpartelaDono();
+            bancodao.insertResidencia(residencia);
+            limpartelaResidencia();
+
             
         }
     }//GEN-LAST:event_jbt_inserirRActionPerformed
+
+    private void jbt_limparTelaRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_limparTelaRActionPerformed
+        limpartelaResidencia();
+    }//GEN-LAST:event_jbt_limparTelaRActionPerformed
+
+    private void jbt_removerRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_removerRActionPerformed
+        if(jtf_codR.getText().equals("      ")){
+            JOptionPane.showMessageDialog(null, "PARA REMOVER PREENCHA O CODIGO DA VENDA NO CAMPO ACIMA");
+        }else{
+                       
+            try {
+                bancodao = new BancoDAO();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }           
+                    
+            bancodao.excluirResidencia(Integer.parseInt(jtf_codR.getText()));
+            limpartelaResidencia();
+            
+        }
+    }//GEN-LAST:event_jbt_removerRActionPerformed
+
+    private void jbt_atualizarRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_atualizarRActionPerformed
+        if(jtf_codR.getText().equals("      ")){
+            JOptionPane.showMessageDialog(null, "PARA ATUALIZAR COMPLETE TODOS OS CAMPOS");
+        }else{
+                       
+            try {
+                bancodao = new BancoDAO();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            Residencia residencia = new Residencia();
+            residencia.setCod_res(Integer.parseInt(jtf_codR.getText()));
+            residencia.setArea(Float.parseFloat(jtf_areaR.getText()));
+            residencia.setRua(jtf_ruaR.getText());
+            residencia.setNum(jtf_numR.getText());
+            residencia.setBairro(jtf_bairroR.getText());            
+                    
+            bancodao.updateResidencia(residencia);
+            limpartelaResidencia();
+
+            
+        }  
+    }//GEN-LAST:event_jbt_atualizarRActionPerformed
+
+    private void jbt_mostrarRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_mostrarRActionPerformed
+        TelaResidencias tela4 = new TelaResidencias(0,"");
+        tela4.setVisible(true);
+    }//GEN-LAST:event_jbt_mostrarRActionPerformed
+
+    private void jbt_buscarRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_buscarRActionPerformed
+        if(jtf_bairro_BR.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "PARA BUSCAR COMPLETE O CAMPO AO LADO");
+        }else{        
+            TelaResidencias tela4 = new TelaResidencias(1,jtf_bairro_BR.getText());
+            tela4.setVisible(true);
+            limpartelaResidencia();
+        }
+    }//GEN-LAST:event_jbt_buscarRActionPerformed
 
     private void limpartelaDono(){
         
@@ -757,6 +844,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
             jtf_telefoneDR.setText("");
             jtf_rendamensalDR.setText("");
             jtf_cpfB_DR.setText("");
+        
+    }
+    
+    private void limpartelaResidencia(){
+
+            jtf_codR.setText("");
+            jtf_areaR.setText("");
+            jtf_ruaR.setText("");
+            jtf_numR.setText("");
+            jtf_bairroR.setText("");
+            jtf_bairro_BR.setText("");
         
     }
     

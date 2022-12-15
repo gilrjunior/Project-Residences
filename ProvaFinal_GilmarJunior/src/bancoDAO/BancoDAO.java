@@ -100,7 +100,7 @@ public class BancoDAO {
             ps = this.conexao.prepareStatement(query);
             ps.setInt(1, residencia.getCod_res());
             ps.setFloat(2, residencia.getArea());
-            ps.setString(3, residencia.getRua()+" "+residencia.getNum());
+            ps.setString(3, residencia.getRua()+" - "+residencia.getNum());
             ps.setString(4, residencia.getBairro());
             ps.setInt(5, residencia.getCod_res());
             ps.execute();
