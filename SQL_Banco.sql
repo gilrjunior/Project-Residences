@@ -29,4 +29,6 @@ create table venda(
     foreign key (cod_residencia) references residencia(cod_residencia)
   
   );
+  
+
 

@@ -593,7 +593,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jButton1" min="-2" pref="250" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextField1" max="32767" attributes="0"/>
+                              <Component id="jtf_valorvendas" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="67" max="32767" attributes="0"/>
@@ -649,7 +649,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jtf_valorvendas" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -714,6 +714,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="INSERIR"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbt_inserirVActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbt_removerV">
               <Properties>
@@ -724,11 +727,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="ATUALIZAR"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbt_atualizarVActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbt_mostrarV">
               <Properties>
                 <Property name="text" type="java.lang.String" value="MOSTRAR"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbt_mostrarVActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbt_vendas6M">
               <Properties>
@@ -759,12 +768,15 @@
                 <Property name="text" type="java.lang.String" value="CALCULO VALOR MEDIO DAS VENDAS"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField1">
+            <Component class="javax.swing.JTextField" name="jtf_valorvendas">
             </Component>
             <Component class="javax.swing.JButton" name="jbt_limparTelaV">
               <Properties>
                 <Property name="text" type="java.lang.String" value="LIMPAR TELA"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbt_limparTelaVActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

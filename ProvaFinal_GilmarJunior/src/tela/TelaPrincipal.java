@@ -8,6 +8,7 @@ import bancoDAO.BancoDAO;
 import classes.*;
 import static java.lang.System.exit;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -97,7 +98,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         jtf_codV = new javax.swing.JFormattedTextField();
         jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        jtf_valorvendas = new javax.swing.JTextField();
         jbt_limparTelaV = new javax.swing.JButton();
         jbt_sair = new javax.swing.JButton();
 
@@ -478,12 +479,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jtf_valorV.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.00"))));
 
         jbt_inserirV.setText("INSERIR");
+        jbt_inserirV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_inserirVActionPerformed(evt);
+            }
+        });
 
         jbt_removerV.setText("REMOVER");
 
         jbt_atualizarV.setText("ATUALIZAR");
+        jbt_atualizarV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_atualizarVActionPerformed(evt);
+            }
+        });
 
         jbt_mostrarV.setText("MOSTRAR");
+        jbt_mostrarV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_mostrarVActionPerformed(evt);
+            }
+        });
 
         jbt_vendas6M.setText("VENDAS NOS ULTIMOS SEIS MESES");
 
@@ -500,6 +516,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jButton1.setText("CALCULO VALOR MEDIO DAS VENDAS");
 
         jbt_limparTelaV.setText("LIMPAR TELA");
+        jbt_limparTelaV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_limparTelaVActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -546,7 +567,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1)))
+                        .addComponent(jtf_valorvendas)))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -591,7 +612,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtf_valorvendas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -845,6 +866,83 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbt_buscarRActionPerformed
 
+    private void jbt_inserirVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_inserirVActionPerformed
+        
+        char cod_venda[] = new char[5];
+        
+        cod_venda = jtf_codV.getText().toCharArray();
+           
+        if(cod_venda[2]%2 == 0 || cod_venda[0]%2 != 0){
+            
+            if(cod_venda[2]%2 == 0){
+                JOptionPane.showMessageDialog(null, "O primeiro caractere deve ser um número par", "ERRO", JOptionPane.WARNING_MESSAGE, null);
+            }
+            
+            if(cod_venda[0]%2 != 0){
+                JOptionPane.showMessageDialog(null, "O terceiro caractere deve ser um número ímpar", "ERRO", JOptionPane.WARNING_MESSAGE, null);
+            }
+            
+        }else{
+            
+            
+            
+        
+        }
+        
+        
+        
+    }//GEN-LAST:event_jbt_inserirVActionPerformed
+
+    private void jbt_atualizarVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_atualizarVActionPerformed
+        
+        char cod_venda[] = new char[5];
+        
+        cod_venda = jtf_codV.getText().toCharArray();
+           
+        if(cod_venda[2]%2 == 0 || cod_venda[0]%2 != 0){
+            
+            if(cod_venda[2]%2 == 0){
+                JOptionPane.showMessageDialog(null, "O primeiro caractere deve ser um número par", "ERRO", JOptionPane.WARNING_MESSAGE, null);
+            }
+            
+            if(cod_venda[0]%2 != 0){
+                JOptionPane.showMessageDialog(null, "O terceiro caractere deve ser um número ímpar", "ERRO", JOptionPane.WARNING_MESSAGE, null);
+            }
+            
+        }else{
+            
+            try {
+                bancodao = new BancoDAO();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            Venda venda = new Venda();
+            
+            venda.setCod_venda(jtf_codV.getText());
+            venda.setCpf(jtf_cpfV.getText());
+            venda.setCod_res(Integer.parseInt(jtf_codrV.getText()));
+            venda.setData(LocalDate.parse(jtf_dtV.getText()));
+            venda.setValor(Float.parseFloat(jtf_valorV.getText()));
+            
+            bancodao.insertVenda(venda);
+            limparTelaVenda();
+ 
+        }
+    }//GEN-LAST:event_jbt_atualizarVActionPerformed
+
+    private void jbt_mostrarVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_mostrarVActionPerformed
+        
+        
+        
+    }//GEN-LAST:event_jbt_mostrarVActionPerformed
+
+    private void jbt_limparTelaVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_limparTelaVActionPerformed
+        limparTelaVenda();
+    }//GEN-LAST:event_jbt_limparTelaVActionPerformed
+
     private void limpartelaDono(){
         
             jtf_cpfDR.setText("");
@@ -865,6 +963,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
             jtf_bairroR.setText("");
             jtf_bairro_BR.setText("");
         
+    }
+    
+    public void limparTelaVenda(){
+        
+        jtf_codV.setText("");
+        jtf_cpfV.setText("");
+        jtf_codrV.setText("");
+        jtf_dtV.setText("");
+        jtf_valorV.setText("");
+        jtf_codVrem.setText("");
+        jtf_valorvendas.setText("");
+    
     }
     
     /**
@@ -930,7 +1040,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton jbbt_removerDR;
     private javax.swing.JButton jbt_atualizarDR;
     private javax.swing.JButton jbt_atualizarR;
@@ -969,5 +1078,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jtf_sobrenomeDR;
     private javax.swing.JFormattedTextField jtf_telefoneDR;
     private javax.swing.JFormattedTextField jtf_valorV;
+    private javax.swing.JTextField jtf_valorvendas;
     // End of variables declaration//GEN-END:variables
 }
