@@ -276,14 +276,11 @@ public class BancoDAO {
         ArrayList<Venda> listavendas = null;
         String query  = "select * from venda";
         if(verif == 1){
-            query  = "select * from residencia where data > ?";
+            query  = "select * from venda where data >= current_date() - interval'180' day";
         }
         
         try{
             ps = this.conexao.prepareStatement(query);
-            if(verif == 1){
-                ps.setString(1, "current_date() - interval'180' day");
-            }
             res = ps.executeQuery();
             listavendas = new ArrayList();
             
@@ -306,6 +303,35 @@ public class BancoDAO {
             JOptionPane.showMessageDialog(null, "\n Erro ao buscar as informações no banco: "+e.toString());
        }
        return (listavendas);
+        
+    }
+    
+    public float Valor_medio(){
+        
+        PreparedStatement ps;
+        ResultSet res;
+        float qntd = 0;
+       
+        String query  = "select avg(valor_venda) as valor_medio from venda";
+        
+        
+        try{
+            ps = this.conexao.prepareStatement(query);
+            res = ps.executeQuery();
+            
+            if(res.next())
+            {
+                qntd = res.getFloat("valor_medio");
+            }
+            res.close();
+            ps.close();
+            
+       }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "\n Erro ao buscar as informações no banco: "+e.toString());
+       }
+       return (qntd);
+        
+        
         
     }
     

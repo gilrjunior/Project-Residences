@@ -23,7 +23,6 @@ public class Venda {
         this.cod_venda = "";
         this.cpf = "";
         this.cod_res = 0;
-        this.Data = LocalDate.of(0000,00,00);
         this.valor = 0;
     }
 

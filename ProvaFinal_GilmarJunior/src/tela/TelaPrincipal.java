@@ -9,6 +9,7 @@ import classes.*;
 import static java.lang.System.exit;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -87,19 +88,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jtf_cpfV = new javax.swing.JFormattedTextField();
         jtf_codrV = new javax.swing.JFormattedTextField();
         jtf_dtV = new javax.swing.JFormattedTextField();
-        jtf_valorV = new javax.swing.JFormattedTextField();
         jbt_inserirV = new javax.swing.JButton();
         jbt_removerV = new javax.swing.JButton();
         jbt_atualizarV = new javax.swing.JButton();
         jbt_mostrarV = new javax.swing.JButton();
         jbt_vendas6M = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
-        jtf_codVrem = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         jtf_codV = new javax.swing.JFormattedTextField();
         jButton1 = new javax.swing.JButton();
         jtf_valorvendas = new javax.swing.JTextField();
         jbt_limparTelaV = new javax.swing.JButton();
+        jtf_valorV = new javax.swing.JTextField();
+        jtf_cod_venda_R = new javax.swing.JFormattedTextField();
         jbt_sair = new javax.swing.JButton();
 
         jLabel14.setText("jLabel14");
@@ -465,7 +466,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
 
         try {
-            jtf_codrV.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#################")));
+            jtf_codrV.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("######")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -476,8 +477,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        jtf_valorV.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.00"))));
-
         jbt_inserirV.setText("INSERIR");
         jbt_inserirV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -486,6 +485,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         jbt_removerV.setText("REMOVER");
+        jbt_removerV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_removerVActionPerformed(evt);
+            }
+        });
 
         jbt_atualizarV.setText("ATUALIZAR");
         jbt_atualizarV.addActionListener(new java.awt.event.ActionListener() {
@@ -502,6 +506,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         jbt_vendas6M.setText("VENDAS NOS ULTIMOS SEIS MESES");
+        jbt_vendas6M.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_vendas6MActionPerformed(evt);
+            }
+        });
 
         jLabel22.setText("Código da Venda");
 
@@ -514,6 +523,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
 
         jButton1.setText("CALCULO VALOR MEDIO DAS VENDAS");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jtf_valorvendas.setEditable(false);
 
         jbt_limparTelaV.setText("LIMPAR TELA");
         jbt_limparTelaV.addActionListener(new java.awt.event.ActionListener() {
@@ -539,8 +555,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(jtf_cpfV)
                     .addComponent(jtf_codrV, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
                     .addComponent(jtf_dtV)
-                    .addComponent(jtf_valorV)
-                    .addComponent(jtf_codV))
+                    .addComponent(jtf_codV)
+                    .addComponent(jtf_valorV))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(79, Short.MAX_VALUE)
@@ -552,7 +568,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel22)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtf_codVrem, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtf_cod_venda_R, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jbt_removerV, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel3Layout.createSequentialGroup()
@@ -608,7 +624,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbt_removerV)
                     .addComponent(jLabel22)
-                    .addComponent(jtf_codVrem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtf_cod_venda_R, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -872,23 +888,37 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
         cod_venda = jtf_codV.getText().toCharArray();
            
-        if(cod_venda[2]%2 == 0 || cod_venda[0]%2 != 0){
+        if(cod_venda[0]%2 == 0 || cod_venda[2]%2 != 0){
             
-            if(cod_venda[2]%2 == 0){
-                JOptionPane.showMessageDialog(null, "O primeiro caractere deve ser um número par", "ERRO", JOptionPane.WARNING_MESSAGE, null);
+            if(cod_venda[0]%2 == 0){
+                JOptionPane.showMessageDialog(null, "O primeiro caractere deve ser um número ímpar", "ERRO", JOptionPane.WARNING_MESSAGE, null);
             }
             
-            if(cod_venda[0]%2 != 0){
-                JOptionPane.showMessageDialog(null, "O terceiro caractere deve ser um número ímpar", "ERRO", JOptionPane.WARNING_MESSAGE, null);
+            if(cod_venda[2]%2 != 0){
+              JOptionPane.showMessageDialog(null, "O terceiro caractere deve ser um número par", "ERRO", JOptionPane.WARNING_MESSAGE, null);
             }
             
         }else{
+            Venda venda = new Venda();
+            
+            try {
+                bancodao = new BancoDAO();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             
-            
+            venda.setCod_venda(jtf_codV.getText());
+            venda.setCpf(jtf_cpfV.getText());
+            venda.setCod_res(Integer.parseInt(jtf_codrV.getText()));
+            venda.setData(LocalDate.parse(jtf_dtV.getText(), DateTimeFormatter.ofPattern("yyyy/MM/dd")));
+            venda.setValor(Float.parseFloat(jtf_valorV.getText()));
+            bancodao.insertVenda(venda);
+            limparTelaVenda();            
         
         }
-        
         
         
     }//GEN-LAST:event_jbt_inserirVActionPerformed
@@ -899,14 +929,70 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
         cod_venda = jtf_codV.getText().toCharArray();
            
-        if(cod_venda[2]%2 == 0 || cod_venda[0]%2 != 0){
+        if(cod_venda[0]%2 == 0 || cod_venda[2]%2 != 0){
             
-            if(cod_venda[2]%2 == 0){
-                JOptionPane.showMessageDialog(null, "O primeiro caractere deve ser um número par", "ERRO", JOptionPane.WARNING_MESSAGE, null);
+            if(cod_venda[0]%2 == 0){
+                JOptionPane.showMessageDialog(null, "O primeiro caractere deve ser um número ímpar", "ERRO", JOptionPane.WARNING_MESSAGE, null);
             }
             
-            if(cod_venda[0]%2 != 0){
-                JOptionPane.showMessageDialog(null, "O terceiro caractere deve ser um número ímpar", "ERRO", JOptionPane.WARNING_MESSAGE, null);
+            if(cod_venda[2]%2 != 0){
+              JOptionPane.showMessageDialog(null, "O terceiro caractere deve ser um número par", "ERRO", JOptionPane.WARNING_MESSAGE, null);
+            }
+            
+        }else{
+            
+            Venda venda = new Venda();
+            
+            try {
+                bancodao = new BancoDAO();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            venda.setCod_venda(jtf_codV.getText());
+            venda.setCpf(jtf_cpfV.getText());
+            venda.setCod_res(Integer.parseInt(jtf_codrV.getText()));
+            venda.setData(LocalDate.parse(jtf_dtV.getText(), DateTimeFormatter.ofPattern("yyyy/MM/dd")));
+            venda.setValor(Float.parseFloat(jtf_valorV.getText()));
+            bancodao.updateVenda(venda);
+            limparTelaVenda();   
+            
+             
+        }
+    }//GEN-LAST:event_jbt_atualizarVActionPerformed
+
+    private void jbt_mostrarVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_mostrarVActionPerformed
+
+        TelaVenda tela5 = new TelaVenda(0);
+        tela5.setVisible(true);
+        
+    }//GEN-LAST:event_jbt_mostrarVActionPerformed
+
+    private void jbt_limparTelaVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_limparTelaVActionPerformed
+        limparTelaVenda();
+    }//GEN-LAST:event_jbt_limparTelaVActionPerformed
+
+    private void jbt_vendas6MActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_vendas6MActionPerformed
+        TelaVenda tela5 = new TelaVenda(1);
+        tela5.setVisible(true);
+    }//GEN-LAST:event_jbt_vendas6MActionPerformed
+
+    private void jbt_removerVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_removerVActionPerformed
+
+        char cod_venda[] = new char[5];
+        
+        cod_venda = jtf_cod_venda_R.getText().toCharArray();
+           
+        if(cod_venda[0]%2 == 0 || cod_venda[2]%2 != 0){
+            
+            if(cod_venda[0]%2 == 0){
+                JOptionPane.showMessageDialog(null, "O primeiro caractere deve ser um número ímpar", "ERRO", JOptionPane.WARNING_MESSAGE, null);
+            }
+            
+            if(cod_venda[2]%2 != 0){
+              JOptionPane.showMessageDialog(null, "O terceiro caractere deve ser um número par", "ERRO", JOptionPane.WARNING_MESSAGE, null);
             }
             
         }else{
@@ -919,29 +1005,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            Venda venda = new Venda();
-            
-            venda.setCod_venda(jtf_codV.getText());
-            venda.setCpf(jtf_cpfV.getText());
-            venda.setCod_res(Integer.parseInt(jtf_codrV.getText()));
-            venda.setData(LocalDate.parse(jtf_dtV.getText()));
-            venda.setValor(Float.parseFloat(jtf_valorV.getText()));
-            
-            bancodao.insertVenda(venda);
+            bancodao.excluirVenda(jtf_cod_venda_R.getText());
             limparTelaVenda();
- 
         }
-    }//GEN-LAST:event_jbt_atualizarVActionPerformed
+                    
+    }//GEN-LAST:event_jbt_removerVActionPerformed
 
-    private void jbt_mostrarVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_mostrarVActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        
-        
-    }//GEN-LAST:event_jbt_mostrarVActionPerformed
-
-    private void jbt_limparTelaVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_limparTelaVActionPerformed
-        limparTelaVenda();
-    }//GEN-LAST:event_jbt_limparTelaVActionPerformed
+            try {
+                bancodao = new BancoDAO();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            jtf_valorvendas.setText(Float.toString(bancodao.Valor_medio()));
+            
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void limpartelaDono(){
         
@@ -972,7 +1054,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jtf_codrV.setText("");
         jtf_dtV.setText("");
         jtf_valorV.setText("");
-        jtf_codVrem.setText("");
+        jtf_cod_venda_R.setText("");
         jtf_valorvendas.setText("");
     
     }
@@ -1065,7 +1147,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jtf_bairro_BR;
     private javax.swing.JFormattedTextField jtf_codR;
     private javax.swing.JFormattedTextField jtf_codV;
-    private javax.swing.JTextField jtf_codVrem;
+    private javax.swing.JFormattedTextField jtf_cod_venda_R;
     private javax.swing.JFormattedTextField jtf_codrV;
     private javax.swing.JFormattedTextField jtf_cpfB_DR;
     private javax.swing.JFormattedTextField jtf_cpfDR;
@@ -1077,7 +1159,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jtf_ruaR;
     private javax.swing.JTextField jtf_sobrenomeDR;
     private javax.swing.JFormattedTextField jtf_telefoneDR;
-    private javax.swing.JFormattedTextField jtf_valorV;
+    private javax.swing.JTextField jtf_valorV;
     private javax.swing.JTextField jtf_valorvendas;
     // End of variables declaration//GEN-END:variables
 }

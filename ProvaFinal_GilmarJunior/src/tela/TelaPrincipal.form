@@ -558,8 +558,8 @@
                           <Component id="jtf_cpfV" max="32767" attributes="0"/>
                           <Component id="jtf_codrV" pref="214" max="32767" attributes="0"/>
                           <Component id="jtf_dtV" max="32767" attributes="0"/>
-                          <Component id="jtf_valorV" max="32767" attributes="0"/>
                           <Component id="jtf_codV" max="32767" attributes="0"/>
+                          <Component id="jtf_valorV" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -573,7 +573,7 @@
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jtf_codVrem" min="-2" pref="153" max="-2" attributes="0"/>
+                                      <Component id="jtf_cod_venda_R" min="-2" pref="153" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jbt_removerV" min="-2" pref="110" max="-2" attributes="0"/>
                                   </Group>
@@ -644,7 +644,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jbt_removerV" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jtf_codVrem" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jtf_cod_venda_R" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -692,7 +692,7 @@
             <Component class="javax.swing.JFormattedTextField" name="jtf_codrV">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-                  <Format format="#################" subtype="-1" type="5"/>
+                  <Format format="######" subtype="-1" type="5"/>
                 </Property>
               </Properties>
             </Component>
@@ -700,13 +700,6 @@
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
                   <Format format="####/##/##" subtype="-1" type="5"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JFormattedTextField" name="jtf_valorV">
-              <Properties>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-                  <Format format="#,###.00" subtype="-1" type="0"/>
                 </Property>
               </Properties>
             </Component>
@@ -722,6 +715,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="REMOVER"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbt_removerVActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbt_atualizarV">
               <Properties>
@@ -743,13 +739,14 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="VENDAS NOS ULTIMOS SEIS MESES"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbt_vendas6MActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel22">
               <Properties>
                 <Property name="text" type="java.lang.String" value="C&#xf3;digo da Venda"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jtf_codVrem">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel23">
               <Properties>
@@ -767,8 +764,14 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="CALCULO VALOR MEDIO DAS VENDAS"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jtf_valorvendas">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jbt_limparTelaV">
               <Properties>
@@ -777,6 +780,10 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbt_limparTelaVActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jtf_valorV">
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="jtf_cod_venda_R">
             </Component>
           </SubComponents>
         </Container>
