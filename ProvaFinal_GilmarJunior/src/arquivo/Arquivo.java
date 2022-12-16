@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import tela.TelaDonos;
 
 /**
@@ -42,7 +43,7 @@ public class Arquivo {
             File file = new File(caminho);
                 if(file.createNewFile())
                 {
-                    System.out.println("O arquivo foi criado");
+                    JOptionPane.showMessageDialog(null, "O arquivo foi criado");
                     FileWriter fw = new FileWriter(file);
                     BufferedWriter bw = new BufferedWriter(fw);
                     
