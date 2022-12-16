@@ -4,6 +4,7 @@
  */
 package tela;
 
+import arquivo.Arquivo;
 import bancoDAO.BancoDAO;
 import classes.*;
 import static java.lang.System.exit;
@@ -102,6 +103,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jtf_valorV = new javax.swing.JTextField();
         jtf_cod_venda_R = new javax.swing.JFormattedTextField();
         jbt_sair = new javax.swing.JButton();
+        jbt_txt = new javax.swing.JButton();
 
         jLabel14.setText("jLabel14");
 
@@ -641,6 +643,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jbt_txt.setText("GERAR TXT");
+        jbt_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_txtActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -649,14 +658,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(213, 213, 213)
                 .addComponent(jbt_sair)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbt_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jtbP_vendas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jbt_sair)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbt_sair)
+                    .addComponent(jbt_txt))
                 .addContainerGap())
         );
 
@@ -1025,6 +1038,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
             
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jbt_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_txtActionPerformed
+        Arquivo arquivo = new Arquivo();
+        arquivo.Gera_txt();
+    }//GEN-LAST:event_jbt_txtActionPerformed
+
     private void limpartelaDono(){
         
             jtf_cpfDR.setText("");
@@ -1140,6 +1158,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jbt_removerR;
     private javax.swing.JButton jbt_removerV;
     private javax.swing.JButton jbt_sair;
+    private javax.swing.JButton jbt_txt;
     private javax.swing.JButton jbt_vendas6M;
     private javax.swing.JTabbedPane jtbP_vendas;
     private javax.swing.JFormattedTextField jtf_areaR;

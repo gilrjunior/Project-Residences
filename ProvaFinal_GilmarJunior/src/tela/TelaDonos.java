@@ -36,6 +36,7 @@ public class TelaDonos extends javax.swing.JFrame {
         
         ArrayList <Dono> listadonos = bancodao.mostraDono(0, "");
         
+        
         for(Dono dono : listadonos){
             
               dtm_tabela.addRow(new Object[]{dono.getNome(), dono.getCpf(), dono.getTelefone(), dono.getRendaMensal()});

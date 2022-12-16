@@ -35,6 +35,8 @@
               <EmptySpace min="-2" pref="213" max="-2" attributes="0"/>
               <Component id="jbt_sair" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="jbt_txt" min="-2" pref="119" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -43,7 +45,10 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="jtbP_vendas" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-              <Component id="jbt_sair" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jbt_sair" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbt_txt" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -795,6 +800,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbt_sairActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jbt_txt">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="GERAR TXT"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbt_txtActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
